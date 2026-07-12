@@ -14,8 +14,8 @@ from fpdf import FPDF
 import tempfile
 import base64
 
-MODEL_PATH = "C:/crop_disease_project/best_model.h5"
-NAMES_PATH = "C:/crop_disease_project/class_names.json"
+MODEL_PATH = "best_model.h5"
+NAMES_PATH = "class_names.json"
 IMG_SIZE   = (224, 224)
 
 DISEASE_DB = {
