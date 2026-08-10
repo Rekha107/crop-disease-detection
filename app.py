@@ -86,8 +86,25 @@ st.markdown("""
         text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); margin: 1rem 0;
     }
     .disease-card {
-        background: #f8fff8; border-radius: 12px; padding: 1.5rem;
-        border: 1px solid #95D5B2; margin: 0.5rem 0;
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 1.25rem 1.5rem;
+        border: 1px solid #e0e0e0;
+        margin: 0.5rem 0;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+    .disease-card h4 {
+        color: #1B4332;
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+        margin-top: 1rem;
+    }
+    .disease-card h4:first-child { margin-top: 0; }
+    .disease-card p {
+        color: #333333;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin-bottom: 0;
     }
     .batch-card {
         background: white; border-radius: 10px; padding: 1rem;
@@ -315,24 +332,20 @@ if mode == "Single Image":
                 db = DISEASE_DB.get(pred_class)
                 if db:
                     icon = SEVERITY_COLORS.get(db["severity"], "🟡")
-                    st.markdown(f"### {icon} Severity: **{db['severity']}**")
-                    ca, cb = st.columns(2)
-                    with ca:
-                        st.markdown(f"""<div class='disease-card'>
-                            <h4>🦠 Cause</h4><p>{db['cause']}</p>
-                            <h4>👁️ Symptoms</h4><p>{db['symptoms']}</p>
-                        </div>""", unsafe_allow_html=True)
-                    with cb:
-                        st.markdown(f"""<div class='disease-card'>
-                            <h4>💊 Treatment</h4><p>{db['treatment']}</p>
-                            <h4>🛡️ Prevention</h4><p>{db['prevention']}</p>
-                        </div>""", unsafe_allow_html=True)
+                    st.markdown(f"#### {icon} Severity: **{db['severity']}**")
+                    st.markdown(f"""<div class='disease-card'>
+                        <h4>🦠 Cause</h4><p>{db['cause']}</p>
+                        <h4>👁️ Symptoms</h4><p>{db['symptoms']}</p>
+                        <h4>💊 Treatment</h4><p>{db['treatment']}</p>
+                        <h4>🛡️ Prevention</h4><p>{db['prevention']}</p>
+                    </div>""", unsafe_allow_html=True)
                 elif is_healthy:
                     st.success("✅ Plant is healthy! No treatment needed.")
-                    st.balloons()
                 else:
-                    st.warning("**Treatment:** Consult an agricultural expert.")
-                    st.info("**Prevention:** Regular monitoring and crop rotation.")
+                    st.markdown(f"""<div class='disease-card'>
+                        <h4>💊 Treatment</h4><p>Consult an agricultural expert for accurate diagnosis and treatment.</p>
+                        <h4>🛡️ Prevention</h4><p>Regular monitoring and crop rotation help prevent most common diseases.</p>
+                    </div>""", unsafe_allow_html=True)
 
             with tab3:
                 if show_top5:
